@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 
 export class ItemModel {
-  constructor(public key: string, public value: string) {}
+  constructor(public key: string, public value: string, public description?: string) {}
 }
 
 @Component({
@@ -65,17 +65,21 @@ export class InfoComponent implements OnInit {
 	  let mediaDevicesSupported = 'mediaDevices' in navigator;
 	  let geoSupported = "geolocation" in navigator;
     
-    this.pwaCapabilityData.push(new ItemModel("Service Worker", serviceWorkerSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("Cache", cacheSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("Push", pushSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("Background Sync", bgSyncSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("IndexedDB", indexedDbSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("Storage", storageSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("Persistant Storage", persistentStorageSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("File API", fileApiSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("Bluetooth", btSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("Media Devices", mediaDevicesSupported? 'supported': 'not supported'));
-    this.pwaCapabilityData.push(new ItemModel("Geolocation", geoSupported? 'supported': 'not supported'));
+    this.pwaCapabilityData.push(new ItemModel("Service Worker", this.setIcon(serviceWorkerSupported)));
+    this.pwaCapabilityData.push(new ItemModel("Cache", this.setIcon(cacheSupported)));
+    this.pwaCapabilityData.push(new ItemModel("Push", this.setIcon(pushSupported)));
+    this.pwaCapabilityData.push(new ItemModel("Background Sync", this.setIcon(bgSyncSupported)));
+    this.pwaCapabilityData.push(new ItemModel("IndexedDB", this.setIcon(indexedDbSupported)));
+    this.pwaCapabilityData.push(new ItemModel("Storage", this.setIcon(storageSupported)));
+    this.pwaCapabilityData.push(new ItemModel("Persistant Storage", this.setIcon(persistentStorageSupported)));
+    this.pwaCapabilityData.push(new ItemModel("File API", this.setIcon(fileApiSupported)));
+    this.pwaCapabilityData.push(new ItemModel("Bluetooth", this.setIcon(btSupported)));
+    this.pwaCapabilityData.push(new ItemModel("Media Devices", this.setIcon(mediaDevicesSupported)));
+    this.pwaCapabilityData.push(new ItemModel("Geolocation", this.setIcon(geoSupported)));
+  }
+
+  private setIcon(supported: boolean) {
+    return supported? "check" : "close";
   }
 
 }

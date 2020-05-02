@@ -1,6 +1,10 @@
-.content {
+.container {
     display: flex;
     justify-content: center;
+}
+
+.content {
+    min-width: 600pt;
 }
 
 .toolbar-space{
