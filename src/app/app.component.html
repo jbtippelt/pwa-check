@@ -1,6 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar color="primary">
   <span>{{ title }}</span>
+  <nav>
+  <a mat-raised-button color="primary" routerLink="/info" routerLinkActive="active">Information</a>
+  <a mat-raised-button color="primary" routerLink="/notification" routerLinkActive="active">Notification</a>
+  </nav>
 </mat-toolbar>
-<app-info></app-info>
-<router-outlet></router-outlet>
+
+<div class="content">
+  
+  <router-outlet></router-outlet>
+</div>
