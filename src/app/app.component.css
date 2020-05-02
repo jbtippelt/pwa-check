@@ -1,0 +1,8 @@
+.content {
+    display: flex;
+    justify-content: center;
+}
+
+.toolbar-space{
+    flex: 1 1 auto;
+}
