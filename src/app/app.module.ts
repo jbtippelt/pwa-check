@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InfoComponent } from './info/info.component';
+import { NotificationComponent } from './notification/notification.component';
 
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +15,8 @@ import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
-    InfoComponent
+    InfoComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
