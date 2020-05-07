@@ -1,0 +1,80 @@
+@import '~@angular/material/theming';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+$mat-myapp-primary: (
+    50 : #ffece7,
+    100 : #ffcec3,
+    200 : #ffae9b,
+    300 : #ff8e72,
+    400 : #ff7554,
+    500 : #ff5d36,
+    600 : #ff5530,
+    700 : #ff4b29,
+    800 : #ff4122,
+    900 : #ff3016,
+    A100 : #ffffff,
+    A200 : #fffcfc,
+    A400 : #ffcdc9,
+    A700 : #ffb6af,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mat-myapp-accent: (
+    50 : #ffe2e0,
+    100 : #ffb7b3,
+    200 : #ff8780,
+    300 : #ff574d,
+    400 : #ff3326,
+    500 : #ff0f00,
+    600 : #ff0d00,
+    700 : #ff0b00,
+    800 : #ff0800,
+    900 : #ff0400,
+    A100 : #ffffff,
+    A200 : #fff2f2,
+    A400 : #ffbfbf,
+    A700 : #ffa6a6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$primary: mat-palette($mat-myapp-primary);
+$accent: mat-palette($mat-myapp-accent);
+
+$theme: mat-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
