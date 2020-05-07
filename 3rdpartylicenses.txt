@@ -57,6 +57,11 @@ MIT
 @angular/core
 MIT
 
+@angular/fire
+MIT
+
+@angular/fire/database
+
 @angular/material
 MIT
 The MIT License
@@ -96,6 +101,21 @@ MIT
 @angular/router
 MIT
 
+@firebase/app
+Apache-2.0
+
+@firebase/component
+Apache-2.0
+
+@firebase/database
+Apache-2.0
+
+@firebase/logger
+Apache-2.0
+
+@firebase/util
+Apache-2.0
+
 core-js
 MIT
 Copyright (c) 2014-2019 Denis Pushkarev
@@ -118,6 +138,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
+firebase/app
+
+firebase/database
 
 ngx-device-detector
 MIT
