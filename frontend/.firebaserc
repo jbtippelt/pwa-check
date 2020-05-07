@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "push-check-f8084": {
+      "hosting": {
+        "pwa-check": [
+          "push-check-f8084"
+        ]
+      }
+    }
+  }
+}

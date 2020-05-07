@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "pwa-check",
+      "public": "dist/pwa-check",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
