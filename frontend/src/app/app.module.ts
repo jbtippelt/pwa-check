@@ -11,13 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire'
-import { AngularFireDatabaseModule } from '@angular/fire/database'
+import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { AngularFireMessagingModule } from '@angular/fire/messaging'
 
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { ClarityModule } from '@clr/angular/';
 
 @NgModule({
   declarations: [
@@ -31,11 +32,13 @@ import { MatIconModule } from '@angular/material/icon';
     DeviceDetectorModule.forRoot(),
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireMessagingModule,
     MatToolbarModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    ClarityModule
   ],
   providers: [],
   bootstrap: [AppComponent]

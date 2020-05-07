@@ -1,2 +1,29 @@
-<p>notification works!</p>
-<button mat-raised-button color="primary">test</button>
+<h1>Notification</h1>
+
+<button mat-raised-button color="primary" (click)="onGenerateToken()">Generate Firebase Cloud Messaging Token</button>
+<p> Notification Permission Granted: {{ permissionGranted }} </p>
+<p> Your Firebase Cloud Messaging Token:</p>
+<p>{{ fcmToken }} </p>
+<button mat-raised-button color="primary" (click)="onPublishLocalNotification()">Publish Local Notification from Webapp</button>
+<p></p>
+<button mat-raised-button color="primary" (click)="onStartTestClick()">Start Test</button>
+
+<ul class="clr-timeline clr-timeline-vertical">
+    <li class="clr-timeline-step" *ngFor="let step of testSteps">
+        <ng-container *ngIf="step.done; then done else notDone"></ng-container>
+        <ng-template #done>
+            <ng-container *ngIf="step.error; then error else noError"></ng-container>
+            <ng-template #error><clr-icon shape="error-standard" aria-label="Error"></clr-icon></ng-template>
+            <ng-template #noError><clr-icon shape="success-standard" aria-label="Completed"></clr-icon></ng-template>
+        </ng-template>
+        <ng-template #notDone>
+            <ng-container *ngIf="step.inProgress; then inProgress else notInProgress"></ng-container>
+            <ng-template #inProgress><clr-spinner clrMedium aria-label="In progress">Fetching data</clr-spinner></ng-template>
+            <ng-template #notInProgress><clr-icon shape="circle" aria-label="Not started"></clr-icon></ng-template>
+        </ng-template>
+        <div class="clr-timeline-step-body">
+        <span class="clr-timeline-step-title">{{ step.title }}</span>
+        <span class="clr-timeline-step-description">{{ step.result }}</span>
+        </div>
+    </li>
+</ul>
