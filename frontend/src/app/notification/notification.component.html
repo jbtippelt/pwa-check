@@ -1,12 +1,16 @@
 <h1>Notification</h1>
 
+<!--
 <button mat-raised-button color="primary" (click)="onGenerateToken()">Generate Firebase Cloud Messaging Token</button>
 <p> Notification Permission Granted: {{ permissionGranted }} </p>
 <p> Your Firebase Cloud Messaging Token:</p>
 <p>{{ fcmToken }} </p>
 <button mat-raised-button color="primary" (click)="onPublishLocalNotification()">Publish Local Notification from Webapp</button>
 <p></p>
-<button mat-raised-button color="primary" (click)="onStartTestClick()">Start Test</button>
+-->
+
+<button mat-raised-button class="testControlButton" color="primary" (click)="onStartTestClick()">Start Test</button>
+<button mat-raised-button class="testControlButton" color="primary" (click)="onResetTestClick()">Reset Test</button>
 
 <ul class="clr-timeline clr-timeline-vertical">
     <li class="clr-timeline-step" *ngFor="let step of testSteps">
@@ -22,8 +26,11 @@
             <ng-template #notInProgress><clr-icon shape="circle" aria-label="Not started"></clr-icon></ng-template>
         </ng-template>
         <div class="clr-timeline-step-body">
-        <span class="clr-timeline-step-title">{{ step.title }}</span>
-        <span class="clr-timeline-step-description">{{ step.result }}</span>
+        <span class="clr-timeline-step-title stepTitle">{{ step.title }}</span>
+        <span class="clr-timeline-step-description stepContent">{{ step.description }}</span>
+        <span class="clr-timeline-step-description stepContent" *ngIf="step.done && !step.error">{{ step.onSuccessMessage }}</span>
+        <span class="clr-timeline-step-description stepContent" *ngIf="step.done && step.error">{{ step.onErrorMessage }}</span>
+        <span class="clr-timeline-step-description stepContent" *ngIf="step.done && step.result">Result Data: {{ step.result }}</span>
         </div>
     </li>
 </ul>

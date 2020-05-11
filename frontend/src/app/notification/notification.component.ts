@@ -2,12 +2,13 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
-import { async } from '@angular/core/testing';
 
 export class TestStep {
   constructor(
     public title: string,
-    public fun: any,
+    private onErrorMessage: string,
+    private onSuccessMessage: string,
+    public fun: () => Promise<any>,
     public inProgress: boolean = false,
     public done: boolean = false,
     public error: boolean = false,
@@ -18,8 +19,14 @@ export class TestStep {
   async run() {
     console.log("start step", this.title)
     this.inProgress = true
-    this.result = await this.fun()
-    this.finish()
+    await this.fun().then((val) => {
+      this.result = val;
+    }).catch((err) => {
+      this.error = true
+      this.result = err
+    }).finally(() => {
+      this.finish()
+    })
   }
 
   finish(){
@@ -29,6 +36,93 @@ export class TestStep {
   }
 }
 
+const NOTIFICATION_TEST_STEPS = (nt: NotificationTest):TestStep[] => {
+  return [
+    new TestStep(
+      "Check Notification Capability",
+      "Error: Your browser is not capable of handling notifications.",
+      "Your browser is capable of handling notifications.",
+      () => nt.isNotificationCapable()
+    ),
+    new TestStep(
+      "Check Service Worker Capability",
+      "Error: Your browser does not support service worker.",
+      "Your browser supports service worker.",
+      () => nt.isNotificationCapable()
+    ),
+    new TestStep(
+      "Request Permission",
+      "Error: Notification Permission is blocked.",
+      "Permission granted successfully.",
+      () => nt.requestPermission()
+    ),
+    new TestStep(
+      "Get Firebase Messaging Token",
+      "Error: Firebase Messaging Token could not been fetched.",
+      "Successfully fetched Firebase Messaging Token.",
+      () => nt.getToken()
+    ),
+    new TestStep(
+      "Publish Local Notification",
+      "Error: Could not publish local notification.",
+      "Successfully published local notification.",
+      () => nt.publishLocalNotification()
+    ),
+    // new TestStep(
+    //   "Publish Local Notification from Service Worker",
+    //   "Error: Local Notification could not been received in the service worker.",
+    //   "Successfully received locals notification in service worker.",
+    //   () => nt.publishLocalNotification()
+    // )
+  ]
+}
+
+class NotificationTest {
+
+  public testSteps: TestStep[] = []
+  private notifications: Notification[] = []
+
+  constructor(private messaging: AngularFireMessaging) {
+    this.testSteps = NOTIFICATION_TEST_STEPS(this)
+  }
+
+  async startTest() {
+    console.log("start test")
+    await this.testSteps.reduce((previousStep, nextStep) => {
+      return previousStep.then(_ => nextStep.run())
+    }, Promise.resolve());
+  }
+
+  resetTest() {
+    this.testSteps = NOTIFICATION_TEST_STEPS(this)
+    this.notifications.forEach((notification) => {
+      notification.close()
+    })
+  }
+
+  public isNotificationCapable(){
+    return new Promise((resolve, reject) => {
+      "Notification" in window ? resolve() : reject()
+    })
+  }
+
+  public requestPermission() {
+    return this.messaging.requestPermission.toPromise()
+  }
+
+  public getToken() {
+    return this.messaging.getToken.toPromise()
+  }
+
+  public publishLocalNotification() {
+    return new Promise((resolve, reject) => {
+        let notification = new Notification("This is a local Notification published directly by the webapp!");
+        this.notifications.push(notification)
+        resolve()
+      }
+    )
+  }
+}
 
 @Component({
   selector: 'app-notification',
@@ -37,59 +131,25 @@ export class TestStep {
 })
 export class NotificationComponent implements OnInit {
 
+  notificationTests: NotificationTest;
   testSteps: TestStep[] = []
 
-  constructor(private cdr: ChangeDetectorRef, private firestore: AngularFirestore, private messaging: AngularFireMessaging) {}
-
-  fcmToken: string = null
-  permissionGranted:boolean = null
+  constructor(private cdr: ChangeDetectorRef, private firestore: AngularFirestore, private messaging: AngularFireMessaging) {
+    this.notificationTests = new NotificationTest(messaging);
+  }
 
   ngOnInit() {
-    this.testSteps.push(new TestStep("Check Notification Capability", () => this.isNotificationCapable()))
-    this.testSteps.push(new TestStep("Request Permission", () => this.requestPermission()))
-    this.testSteps.push(new TestStep("Get Firebase Messaging Token", () => this.getToken))
-    // this.testSteps.push(new TestStep("Send local Notification from Webapp", () => {console.log("0")}))
-    // this.testSteps.push(new TestStep("Send local Notification from Service Worker", () => {console.log("0")}))
-    // this.testSteps.push(new TestStep("Send push Notification", () => {console.log("0")}))
+    this.onResetTestClick()
   }
 
   onStartTestClick() {
-    this.startTest()
+    this.notificationTests.startTest()
   }
+  
+  onResetTestClick() {
+    this.notificationTests.resetTest()
+    this.testSteps = this.notificationTests.testSteps
 
-  startTest() {
-    this.testSteps.forEach(async (step) =>{
-      await step.run()
-    })
-  }
-
-  isNotificationCapable(){
-    if(("Notification" in window)){
-      return "Your browser is capable of handling notifications."
-    } else {
-      return "Error: Your browser is not capable of handling notifications."
-    }
-  }
-
-  async requestPermission() {
-    const result = await this.messaging.requestPermission.toPromise().then(
-      (resolve) => { return "Successfully permission granted." },
-      (reject) => { return "Error: Permission is blocked."}
-    );
-    return result;
-  }
-
-  async getToken() {
-    const res = await this.messaging.getToken.toPromise().then(
-      (resolve) => { return "Firebase Messaging Token generated:" },
-      (reject) => { return "Error: Firebase Messaging Token could not be generated."}
-    );
-    console.log(res);
-    return res;
-  }
-
-  onPublishLocalNotification() {
-    var notification = new Notification("This is a local Notification published directly by the webapp!");
   }
 
 }
