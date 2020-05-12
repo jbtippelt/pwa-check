@@ -57,16 +57,16 @@ const NOTIFICATION_TEST_STEPS = (nt: NotificationTest):TestStep[] => {
       () => nt.requestPermission()
     ),
     new TestStep(
-      "Get Firebase Messaging Token",
-      "Error: Firebase Messaging Token could not been fetched.",
-      "Successfully fetched Firebase Messaging Token.",
-      () => nt.getToken()
-    ),
-    new TestStep(
       "Publish Local Notification",
       "Error: Could not publish local notification.",
       "Successfully published local notification.",
       () => nt.publishLocalNotification()
+    ),
+    new TestStep(
+      "Get Firebase Messaging Token",
+      "Error: Firebase Messaging Token could not been fetched.",
+      "Successfully fetched Firebase Messaging Token.",
+      () => nt.getToken()
     ),
     // new TestStep(
     //   "Publish Local Notification from Service Worker",
