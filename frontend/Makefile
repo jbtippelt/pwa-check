@@ -23,6 +23,12 @@ ${deps}: package.json package-lock.json
 dev: deps
 	${ng} serve
 
+build: deps
+	${ng} build --prod
+
+sw-dev: build
+	npx http-server -p 8080 dist/pwa-check
+
 publish: deps
 	${ng} build --prod --base-href https://jbtippelt.github.io/pwa-check/;
 	${ghpages} -d dist/pwa-check/ --no-silent --repo=https://github.com/jbtippelt/pwa-check.git;

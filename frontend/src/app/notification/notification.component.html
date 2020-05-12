@@ -13,7 +13,7 @@
 <button mat-raised-button class="testControlButton" color="primary" (click)="onResetTestClick()">Reset Test</button>
 
 <ul class="clr-timeline clr-timeline-vertical">
-    <li class="clr-timeline-step" *ngFor="let step of testSteps">
+    <li class="clr-timeline-step step" *ngFor="let step of testSteps">
         <ng-container *ngIf="step.done; then done else notDone"></ng-container>
         <ng-template #done>
             <ng-container *ngIf="step.error; then error else noError"></ng-container>

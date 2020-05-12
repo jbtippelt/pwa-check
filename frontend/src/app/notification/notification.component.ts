@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
+import { resolve } from 'url';
 
 export class TestStep {
   constructor(
@@ -48,7 +49,7 @@ const NOTIFICATION_TEST_STEPS = (nt: NotificationTest):TestStep[] => {
       "Check Service Worker Capability",
       "Error: Your browser does not support service worker.",
       "Your browser supports service worker.",
-      () => nt.isNotificationCapable()
+      () => nt.isServiceWorkerCapable()
     ),
     new TestStep(
       "Request Permission",
@@ -61,6 +62,18 @@ const NOTIFICATION_TEST_STEPS = (nt: NotificationTest):TestStep[] => {
       "Error: Could not publish local notification.",
       "Successfully published local notification.",
       () => nt.publishLocalNotification()
+    ),
+    new TestStep(
+      "Register Service Worker",
+      "Error: The service worker is not available.",
+      "The service worker registration is available.",
+      () => nt.registerServiceWorker()
+    ),
+    new TestStep(
+      "Check Service Worker Availability",
+      "Error: The service worker is not available.",
+      "The service worker registration is available.",
+      () => nt.isServiceWorkerAvailable()
     ),
     new TestStep(
       "Get Firebase Messaging Token",
@@ -106,8 +119,28 @@ class NotificationTest {
     })
   }
 
+  public isServiceWorkerCapable(){
+    return new Promise((resolve, reject) => {
+      'serviceWorker' in navigator ? resolve() : reject()
+    })
+  }
+
+  public registerServiceWorker() {
+    return navigator.serviceWorker.register(window.origin + '/service-worker.js')
+  }
+
+  public isServiceWorkerAvailable(){
+    return new Promise(async (resolve, reject) => {
+      let sw = await navigator.serviceWorker.getRegistration()
+      sw ? resolve(JSON.stringify(sw)) : reject()
+    })
+  }
+
   public requestPermission() {
-    return this.messaging.requestPermission.toPromise()
+    return new Promise(async (resolve, reject) => {
+      let result = await Notification.requestPermission()
+      result === "denied" ? reject() : resolve()
+    })
   }
 
   public getToken() {
@@ -116,11 +149,14 @@ class NotificationTest {
 
   public publishLocalNotification() {
     return new Promise((resolve, reject) => {
+      if (Notification.permission === "granted") {
         let notification = new Notification("This is a local Notification published directly by the webapp!");
         this.notifications.push(notification)
         resolve()
+      } else {
+        reject()
       }
-    )
+    })
   }
 }
 
