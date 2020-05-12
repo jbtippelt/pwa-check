@@ -26,11 +26,11 @@
             <ng-template #notInProgress><clr-icon shape="circle" aria-label="Not started"></clr-icon></ng-template>
         </ng-template>
         <div class="clr-timeline-step-body">
-        <span class="clr-timeline-step-title stepTitle">{{ step.title }}</span>
-        <span class="clr-timeline-step-description stepContent">{{ step.description }}</span>
-        <span class="clr-timeline-step-description stepContent" *ngIf="step.done && !step.error">{{ step.onSuccessMessage }}</span>
-        <span class="clr-timeline-step-description stepContent" *ngIf="step.done && step.error">{{ step.onErrorMessage }}</span>
-        <span class="clr-timeline-step-description stepContent" *ngIf="step.done && step.result">Result Data: {{ step.result }}</span>
+        <span class="clr-timeline-step-title stepTitle wrap">{{ step.title }}</span>
+        <span class="clr-timeline-step-description stepContent wrap">{{ step.description }}</span>
+        <span class="clr-timeline-step-description stepContent wrap" *ngIf="step.done && !step.error">{{ step.onSuccessMessage }}</span>
+        <span class="clr-timeline-step-description stepContent wrap" *ngIf="step.done && step.error">{{ step.onErrorMessage }}</span>
+        <span class="clr-timeline-step-description stepContent wrap" *ngIf="step.done && step.result">Result Data: {{ step.result }}</span>
         </div>
     </li>
 </ul>

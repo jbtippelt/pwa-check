@@ -10,6 +10,9 @@ export class AppComponent {
   title = 'PWA Check';
 
   ngOnInit() {
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(environment.baseUrl + '/service-worker.js')
+    }
     if(environment.production) {
       alert("Under development!")
     }
