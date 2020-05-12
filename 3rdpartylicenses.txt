@@ -60,6 +60,8 @@ MIT
 @angular/fire
 MIT
 
+@angular/fire/database
+
 @angular/fire/firestore
 
 @angular/fire/messaging
@@ -115,6 +117,9 @@ Apache-2.0
 @firebase/component
 Apache-2.0
 
+@firebase/database
+Apache-2.0
+
 @firebase/firestore
 Apache-2.0
 
@@ -157,6 +162,8 @@ THE SOFTWARE.
 
 
 firebase/app
+
+firebase/database
 
 firebase/firestore
 
