@@ -1,0 +1,9 @@
+{
+    "name": "PWA Check",
+    "short_name": "PWA Check",
+    "theme_color": "#0026ff",
+    "background_color": "#ffffff",
+    "display": "browser",
+    "scope": "/",
+    "start_url": "/"
+  }
