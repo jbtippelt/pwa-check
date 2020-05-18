@@ -13,8 +13,8 @@ export class AppComponent {
     if('serviceWorker' in navigator) {
       navigator.serviceWorker.register(environment.baseUrl + '/service-worker.js')
     }
-    if(environment.production) {
-      alert("Under development!")
-    }
+    // if(environment.production) {
+    //   alert("Under development!")
+    // }
   }
 }
