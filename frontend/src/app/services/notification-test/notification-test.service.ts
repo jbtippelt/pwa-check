@@ -182,7 +182,11 @@ export class NotificationTestService {
   public publishLocalNotification() {
     return new Promise((resolve, reject) => {
       if (Notification.permission === "granted") {
-        let notification = new Notification("This is a local Notification published directly by the webapp!");
+        const title = 'PWA Check - local';
+        const options = {
+          body: 'Local notification published by the webapp itself.',
+        };
+        let notification = new Notification(title, options);
         this.notifications.push(notification)
         resolve()
       } else {
