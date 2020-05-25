@@ -7,8 +7,6 @@ body {
     height: 100%;
     margin: 0;
     font-family: Lato, "Helvetica Neue", sans-serif;
-    background-image: url('https://cdn.discordapp.com/avatars/689009547737563146/fa0a992574ee5676609e1f64af92b9bb.png?size=2048');
-    background-size: contain;   
 }
 
 h1 {
@@ -19,20 +17,6 @@ h1 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-    text-align: center;
-    color: pink;
-}
-
-h2 {
-    display: block;
-    font-size: 1.5em;
-    margin-top: 0.83em;
-    margin-bottom: 0.83em;
-    margin-left: 0;
-    margin-right: 0;
-    font-weight: bold;
-    text-align: center;
-    color: pink;
 }
 
 $my-app-primary: mat-palette($mat-blue-grey);

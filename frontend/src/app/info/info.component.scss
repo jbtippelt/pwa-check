@@ -3,7 +3,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    background-image: url('https://i.giphy.com/media/5xaOcLGaiDkwNQjBwju/giphy.webp');
 }
 
 .table-container {
@@ -13,14 +12,6 @@
 
 .table {
     width: 100%;
-}
-
-.mat-header-row {
-    background-color: pink;
-}
-
-.mat-row {
-    background-color: pink;
 }
 
 @media (max-width: 770px) {
