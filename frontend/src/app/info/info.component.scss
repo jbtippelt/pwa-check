@@ -1,3 +1,24 @@
-table {
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.table-container {
+    width: 48%;
+    min-width: 300px;
+}
+
+.table {
     width: 100%;
+}
+
+@media (max-width: 770px) {
+    .container {
+        flex-direction: column;
+    }
+    .table-container {
+        width: 100%;
+    }
 }

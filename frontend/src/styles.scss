@@ -1,75 +1,90 @@
-@import '~@angular/material/theming';
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/theming";
+@import "~@angular/material/prebuilt-themes/pink-bluegrey";
 
 /* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family: Lato, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Lato, "Helvetica Neue", sans-serif;
+}
 
+h1 {
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+$my-app-primary: mat-palette($mat-blue-grey);
 
 $mat-myapp-primary: (
-    50 : #e0e5ff,
-    100 : #b3beff,
-    200 : #8093ff,
-    300 : #4d67ff,
-    400 : #2647ff,
-    500 : #0026ff,
-    600 : #0022ff,
-    700 : #001cff,
-    800 : #0017ff,
-    900 : #000dff,
-    A100 : #ffffff,
-    A200 : #f2f3ff,
-    A400 : #bfc1ff,
-    A700 : #a6a7ff,
+    50: #e0e5ff,
+    100: #b3beff,
+    200: #8093ff,
+    300: #4d67ff,
+    400: #2647ff,
+    500: #0026ff,
+    600: #0022ff,
+    700: #001cff,
+    800: #0017ff,
+    900: #000dff,
+    A100: #ffffff,
+    A200: #f2f3ff,
+    A400: #bfc1ff,
+    A700: #a6a7ff,
     contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #ffffff,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #ffffff,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000,
+    ),
 );
 
 $mat-myapp-accent: (
-    50 : #ffe2e0,
-    100 : #ffb7b3,
-    200 : #ff8780,
-    300 : #ff574d,
-    400 : #ff3326,
-    500 : #ff0f00,
-    600 : #ff0d00,
-    700 : #ff0b00,
-    800 : #ff0800,
-    900 : #ff0400,
-    A100 : #ffffff,
-    A200 : #fff2f2,
-    A400 : #ffbfbf,
-    A700 : #ffa6a6,
+    50: #ffe2e0,
+    100: #ffb7b3,
+    200: #ff8780,
+    300: #ff574d,
+    400: #ff3326,
+    500: #ff0f00,
+    600: #ff0d00,
+    700: #ff0b00,
+    800: #ff0800,
+    900: #ff0400,
+    A100: #ffffff,
+    A200: #fff2f2,
+    A400: #ffbfbf,
+    A700: #ffa6a6,
     contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
+        50: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+        800: #ffffff,
+        900: #ffffff,
+        A100: #000000,
+        A200: #000000,
+        A400: #000000,
+        A700: #000000,
+    ),
 );
 
 $primary: mat-palette($mat-myapp-primary);

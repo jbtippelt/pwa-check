@@ -1,5 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar class="toolbar" color="primary">
+<!--mat-toolbar class="toolbar" color="primary">
+
   <span>
     {{ title }}
     <a href="https://getflip.de" target="_blank" class="subheadder">
@@ -11,9 +12,36 @@
   <a mat-flat-button color="primary" routerLink="/info" routerLinkActive="active">Information</a>
   <a mat-flat-button color="primary" routerLink="/notification" routerLinkActive="active">Notification</a>
   </nav>
+</mat-toolbar> -->
+<!-- <div class=""> -->
+<mat-toolbar color="primary" class="app-toolbar">
+  <mat-toolbar-row>
+    <span>
+      {{ title }}
+      <a href="https://getflip.de" target="_blank" class="subheadder">
+        powered by Flip
+      </a>
+    </span>
+    <span class="toolbar-space"></span>
+    <nav>
+      <a mat-flat-button color="primary" routerLink="/info" routerLinkActive="active">
+        <mat-icon *ngIf="mobile">info</mat-icon>
+        <span *ngIf="!mobile">Information</span>
+      </a>
+      <a mat-flat-button color="primary" routerLink="/notification" routerLinkActive="active">
+        <mat-icon *ngIf="mobile">perm_device_information</mat-icon>
+        <span *ngIf="!mobile">Notification</span>
+      </a>
+    </nav>
+    <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-flat-button color="primary" routerLink="/info">Informati0n</button>
+      <button mat-flat-button color="primary" routerLink="/notification">Notificati0n</button>
+    </mat-menu> -->
+  </mat-toolbar-row>
 </mat-toolbar>
-<div class="container">
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
+<div class="content">
+  <router-outlet></router-outlet>
 </div>
+
+<!-- </div> -->

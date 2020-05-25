@@ -1,5 +1,14 @@
-.step {
-    
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .stepTitle {
@@ -7,19 +16,19 @@
 }
 
 .stepContent {
-    max-width: 400pt;
+    word-wrap: break-word;
+    width: 300px;
     margin-bottom: 12pt;
     font-size: 12pt;
+}
+
+.timeline-container {
+    // border-style: groove;
+    max-width: 300px;
+    // margin: 0px;
 }
 
 .testControlButton {
     margin: 6pt;
 }
 
-.wrap { 
-    white-space: pre-wrap;      /* CSS3 */   
-    white-space: -moz-pre-wrap; /* Firefox */    
-    white-space: -pre-wrap;     /* Opera <7 */   
-    white-space: -o-pre-wrap;   /* Opera 7 */    
-    word-wrap: break-word;      /* IE */
- }
