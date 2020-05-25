@@ -14,12 +14,12 @@ export class AppComponent {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register(environment.baseUrl + '/service-worker.js')
     }
-    if (environment.production) {
-      alert("Under development!")
-    }
     if (window.screen.width <= 500) {
       this.mobile = true;
     }
+    // if(environment.production) {
+    //   alert("Under development!")
+    // }
   }
 
   @HostListener("window:resize", [])

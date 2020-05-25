@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { resolve } from 'url';
 
 export class TestStep {
   constructor(
@@ -113,6 +114,7 @@ export class NotificationTestService {
 
   private sw: ServiceWorkerRegistration
   private fcmToken
+  private receivedPushNotification = false
 
   constructor(private database: AngularFireDatabase, private afMessaging: AngularFireMessaging) {
     this.testSteps = NOTIFICATION_TEST_STEPS(this)
@@ -126,6 +128,7 @@ export class NotificationTestService {
   }
 
   resetTest() {
+    this.receivedPushNotification = false
     this.testSteps = NOTIFICATION_TEST_STEPS(this)
     this.notifications.forEach((notification) => {
       notification.close()
@@ -182,7 +185,11 @@ export class NotificationTestService {
   public publishLocalNotification() {
     return new Promise((resolve, reject) => {
       if (Notification.permission === "granted") {
-        let notification = new Notification("This is a local Notification published directly by the webapp!");
+        const title = 'PWA Check - local';
+        const options = {
+          body: 'Local notification published by the webapp itself.',
+        };
+        let notification = new Notification(title, options);
         this.notifications.push(notification)
         resolve()
       } else {
@@ -192,11 +199,29 @@ export class NotificationTestService {
   }
 
   public publishPushNotification() {
-    let object = {
+    const object = {
       sent: false,
       timestamp: Date.now()
     }
-    return this.database.database.ref(`/push-tokens/${this.fcmToken}`).set(object)
-    // TODO
+    const timeoutMs = 6000
+
+    this.setServiceWorkerListener()
+    this.database.database.ref(`/push-tokens/${this.fcmToken}`).set(object)
+
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.receivedPushNotification? resolve() : reject(`Timout after ${timeoutMs} ms`)
+      }, timeoutMs)
+    })
+
+  }
+
+  private setServiceWorkerListener() {
+    navigator.serviceWorker.onmessage = (event) => {
+      if (event.data && event.data.type === 'ACK_PUSH_NOTIFICATION') {
+        console.log("received sw message")
+        this.receivedPushNotification = true
+      }
+    };
   }
 }
