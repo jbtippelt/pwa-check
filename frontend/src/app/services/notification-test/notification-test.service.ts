@@ -66,12 +66,6 @@ const NOTIFICATION_TEST_STEPS = (nt: NotificationTestService):TestStep[] => {
       () => nt.requestPermission()
     ),
     new TestStep(
-      "Publish Local Notification",
-      "Error: Could not publish local notification.",
-      "Successfully published local notification.",
-      () => nt.publishLocalNotification()
-    ),
-    new TestStep(
       "Check Service Worker Registration",
       "Error: The service worker registration is not ready.",
       "The service worker registration is ready.",
@@ -82,6 +76,12 @@ const NOTIFICATION_TEST_STEPS = (nt: NotificationTestService):TestStep[] => {
       "Error: The service worker is not available.",
       "The service worker registration is available.",
       () => nt.isServiceWorkerAvailable()
+    ),
+    new TestStep(
+      "Publish Local Notification",
+      "Error: Could not publish local notification.",
+      "Successfully published local notification.",
+      () => nt.publishLocalNotification()
     ),
     new TestStep(
       "Get Firebase Messaging Token",
