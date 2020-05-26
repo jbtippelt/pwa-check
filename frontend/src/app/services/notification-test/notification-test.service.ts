@@ -189,8 +189,8 @@ export class NotificationTestService {
         const options = {
           body: 'Local notification published by the webapp itself.',
         };
-        let notification = new Notification(title, options);
-        this.notifications.push(notification)
+        let notification = this.sw.showNotification(title, options);
+        // this.notifications.push(notification)
         resolve()
       } else {
         reject()
