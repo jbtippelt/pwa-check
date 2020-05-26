@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   @HostListener("window:resize", [])
-  private onResize() {
+  public onResize() {
     if (window.screen.width <= 500) {
       this.mobile = true;
     } else {
